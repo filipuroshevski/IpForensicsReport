@@ -1,0 +1,6 @@
+@IpForensicsReport_HostAddress = http://localhost:5126
+
+GET {{IpForensicsReport_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
