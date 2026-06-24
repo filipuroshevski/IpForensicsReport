@@ -29,12 +29,14 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets"
             ],
             "styles": [
+              "src/assets/vendors/simple-line-icons/css/simple-line-icons.css",
+              "src/assets/vendors/css/vendor.bundle.base.css",
+              "src/assets/vendors/daterangepicker/daterangepicker.css",
+              "src/assets/vendors/chartist/chartist.min.css",
+              "src/assets/css/style.css",
               "src/styles.css"
             ]
           },

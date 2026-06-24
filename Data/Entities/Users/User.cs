@@ -1,11 +1,11 @@
 
+using Microsoft.AspNetCore.Identity;
+
 namespace Data.Entities.Users
 {
-    public class User : BaseEntity
+    public class User : IdentityUser
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string PasswordHash { get; set; } = null!;
     }
 }

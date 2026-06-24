@@ -1,0 +1,60 @@
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="content-wrapper d-flex align-items-center auth">
+      <div class="row flex-grow">
+        <div class="col-lg-4 mx-auto">
+          <div class="auth-form-light text-left p-5">
+            <div class="text-center mb-4">
+              <h2 class="font-weight-bold">Welcome</h2>
+              <p class="text-muted">
+                Create your account to get started
+              </p>
+            </div>
+            <div class="alert alert-success" *ngIf="successMessage">
+              {{ successMessage }}
+            </div>
+            <div class="form-group">
+              <input type="text" [(ngModel)]="registerModel.FirstName" class="form-control form-control-lg"
+                placeholder="FirstName">
+              @if (errorModel?.FirstName) {
+              <div class="alert alert-danger">
+                {{ errorModel.FirstName }}
+              </div>
+              }
+            </div>
+            <div class="form-group">
+              <input type="text" [(ngModel)]="registerModel.LastName" class="form-control form-control-lg"
+                placeholder="LastName">
+              <div class="alert alert-danger mt-1" role="alert" *ngIf="errorModel!=null && errorModel.LastName!=null">
+                {{errorModel.LastName}}</div>
+            </div>
+            <div class="form-group">
+              <input type="email" [(ngModel)]="registerModel.Email" class="form-control form-control-lg"
+                placeholder="Email">
+              <div class="alert alert-danger mt-1" role="alert" *ngIf="errorModel!=null && errorModel.Email!=null">
+                {{errorModel.Email}}</div>
+            </div>
+
+            <div class="form-group">
+              <input type="password" [(ngModel)]="registerModel.Password" class="form-control form-control-lg"
+                placeholder="Password">
+              <div class="alert alert-danger mt-1" role="alert" *ngIf="errorModel!=null && errorModel.Password!=null">
+                {{errorModel.Password}}</div>
+            </div>
+
+            <div class="mt-3">
+              <a class="btn d-grid btn-primary btn-lg font-weight-medium auth-form-btn"
+                (click)="registerUser(registerModel)">SIGN UP</a>
+            </div>
+            <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.html"
+                class="text-primary">Login</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
