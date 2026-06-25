@@ -1,5 +1,7 @@
 ﻿using Data.Entities.Users;
+using Domain.Models.Errors;
 using Domain.Models.Helper.ModalState;
+using Domain.Models.Login;
 using Domain.Models.Register;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -55,12 +57,9 @@ namespace IpForensicsReport.Controllers
 
                 switch (ex.Message)
                 {
-                    case "TheUserWithThisEmailExist":
-                        error.Errors.Add(new ValidationFailure(
-                            "Email",
-                            "The user with this email already exists"));
+                    case ErrorModel.UserAlreadyExist:
+                        error.Errors.Add(new FluentValidation.Results.ValidationFailure("UserAlreadyExist", ErrorModel.UserAlreadyExist));
                         break;
-
                     default:
                         error.Errors.Add(new ValidationFailure(
                             "SystemErrorOccured",
@@ -68,7 +67,51 @@ namespace IpForensicsReport.Controllers
                         break;
                 }
 
-                return BadRequest(ModalStateHelper.ModalStateException(error));
+                return BadRequest(new JsonResult(ModalStateHelper.ModalStateException(error)));
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+            try
+            {
+                var validator = new LoginModelValidator();
+                var result = validator.Validate(model);
+
+                if (!result.IsValid)
+                {
+                    return BadRequest(new JsonResult(ModalStateHelper.ModalStateException(result)));
+                }
+
+                var token=await _authenticationService.Login(model);
+
+
+                return new JsonResult(new { token });
+
+            }
+            catch (Exception ex)
+            {
+                var error = new ValidationResult();
+
+                switch (ex.Message)
+                {
+                    case ErrorModel.UserNotFound:
+                        error.Errors.Add(new FluentValidation.Results.ValidationFailure("UserNotFound", ErrorModel.UserNotFound));
+                        break;
+                    case ErrorModel.InvalidPassword:
+                        error.Errors.Add(new FluentValidation.Results.ValidationFailure("InvalidPassword", ErrorModel.InvalidPassword));
+                        break;
+                    default:
+                        error.Errors.Add(new ValidationFailure(
+                            "SystemErrorOccured",
+                            "A system error has occurred"));
+                        break;
+                }
+
+                return BadRequest(new JsonResult(ModalStateHelper.ModalStateException(error)));
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Domain.Models.Errors;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,12 +17,27 @@ namespace Domain.Models.Register
     {
         public RegisterUserModelValidator()
         {
-            RuleFor(x => x.Email).Matches(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$").WithMessage("The Email is not valid");
-            RuleFor(x => x.Email).NotEmpty().WithMessage("The Email is required field");
-            RuleFor(x => x.FirstName).NotEmpty().WithMessage("The First Name is required field");
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("The Last Name is required field");
-            RuleFor(x => x.Password).MinimumLength(6).WithMessage("The Password must be greather than 6 characters")
-               .NotEmpty().WithMessage("The Password is required field");
+            RuleFor(x => x.Email)
+                .Matches(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$")
+                .WithMessage(ErrorModel.InvalidEmail);
+
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .WithMessage(ErrorModel.EmailRequired);
+
+            RuleFor(x => x.FirstName)
+                .NotEmpty()
+                .WithMessage(ErrorModel.FirstNameRequired);
+
+            RuleFor(x => x.LastName)
+                .NotEmpty()
+                .WithMessage(ErrorModel.LastNameRequired);
+
+            RuleFor(x => x.Password)
+                .MinimumLength(6)
+                .WithMessage(ErrorModel.PasswordMinLength)
+                .NotEmpty()
+                .WithMessage(ErrorModel.PasswordRequired);
         }
     }
 }

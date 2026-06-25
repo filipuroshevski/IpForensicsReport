@@ -33,6 +33,8 @@
                 placeholder="Email">
               <div class="alert alert-danger mt-1" role="alert" *ngIf="errorModel!=null && errorModel.Email!=null">
                 {{errorModel.Email}}</div>
+                <div class="alert alert-danger mt-1" role="alert" *ngIf="errorModel!=null && errorModel.UserAlreadyExist!=null">
+                {{errorModel.UserAlreadyExist}}</div>
             </div>
 
             <div class="form-group">
@@ -46,7 +48,7 @@
               <a class="btn d-grid btn-primary btn-lg font-weight-medium auth-form-btn"
                 (click)="registerUser(registerModel)">SIGN UP</a>
             </div>
-            <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.html"
+            <div class="text-center mt-4 font-weight-light"> Already have an account? <a routerLink="/login"
                 class="text-primary">Login</a>
             </div>
 

@@ -17,7 +17,10 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@auth0/angular-jwt": "^5.2.0",
+    "ng-http-loader": "^20.0.0",
     "rxjs": "~7.8.0",
+    "storage-encryption": "^1.0.16",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

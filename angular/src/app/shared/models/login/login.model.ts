@@ -1,4 +1,4 @@
-export class LoginModel{
-    public Username: string="";
-    public Password:string="";
+export class LoginModel {
+    public Username: string = "";
+    public Password: string = "";
 }

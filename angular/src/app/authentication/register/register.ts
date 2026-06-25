@@ -53,11 +53,11 @@ export class Register {
           }, 2000);
         },
         error: errorResponse => {
-          debugger
           this.errorModel = this._utilsService.parseErrors(errorResponse);
           this._cd.detectChanges();
         }
       });
   };
+//#endregion
 
 }

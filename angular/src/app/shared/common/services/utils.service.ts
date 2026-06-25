@@ -13,7 +13,6 @@ export class UtilsService {
   systemErrorModel$ = this.systemErrorSubject.asObservable();
   systemErrorModel = new EventEmitter<SystemErrorModel>();
 
-  //#region Constructor
   constructor(private _router: Router) {
 
   }
