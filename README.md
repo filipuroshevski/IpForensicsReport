@@ -62,12 +62,32 @@ Open `IpForensicsReport/appsettings.json` and set the values for your environmen
 > .NET User Secrets or environment variables (e.g. `Apis__AbuseIpDbApiKey`).
 > No code changes are needed — they're read through `IConfiguration`.
 
-## 3. Create the database schema
+## 3. Create the database and apply migrations
 
-From the repository root, apply the EF Core migrations:
+First create an empty MySQL database (the tables themselves are created by the
+migrations in the next command):
+
+```sql
+CREATE DATABASE reportapplication;
+```
+
+Then, from the repository root, apply the EF Core migrations:
 
 ```bash
 dotnet ef database update -p Data/Data.csproj -s IpForensicsReport/IpForensicsReport.csproj
+```
+
+This runs both migrations in order and builds the full schema — no manual SQL needed:
+
+- `InitialIdentity` — the ASP.NET Identity tables (`User`, roles, etc.)
+- `AddIpForensicsReport` — the `IpForensicsReport` table and its `UserId → User.Id` foreign key
+
+Verify it worked:
+
+```sql
+USE reportapplication;
+SHOW TABLES;                           -- includes IpForensicsReport and the AspNet*/User tables
+SHOW CREATE TABLE IpForensicsReport;   -- shows FK_IpForensicsReport_User_UserId
 ```
 
 ## 4. Run the backend
