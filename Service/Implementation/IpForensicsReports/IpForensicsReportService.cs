@@ -58,12 +58,12 @@ namespace Service.Implementation.IpForensicsReports
             var client = _httpClientFactory.CreateClient();
             var ipApiBaseUrl = _configuration["Apis:IpApiBaseUrl"];
 
-            var geoResponse =
+            var ipApiBaseUrlResponse =
                 await client.GetFromJsonAsync<IpApiResponseModel>(
                     $"{ipApiBaseUrl}json/{model.IpAddress}" +
                     "?fields=status,message,continent,country,regionName,city,mobile,proxy,hosting");
 
-            if (geoResponse == null || geoResponse.Status != "success")
+            if (ipApiBaseUrlResponse == null || ipApiBaseUrlResponse.Status != "success")
             {
                 throw new ApplicationException(ErrorModel.IpAddressInvalid);
             }
@@ -91,14 +91,14 @@ namespace Service.Implementation.IpForensicsReports
                 TotalReports = abuseResponse?.Data?.TotalReports ?? 0,
                 LastReportedDate = abuseResponse?.Data?.LastReportedAt,
 
-                Continent = geoResponse.Continent,
-                Country = geoResponse.Country,
-                Region = geoResponse.RegionName,
-                City = geoResponse.City,
+                Continent = ipApiBaseUrlResponse.Continent,
+                Country = ipApiBaseUrlResponse.Country,
+                Region = ipApiBaseUrlResponse.RegionName,
+                City = ipApiBaseUrlResponse.City,
 
-                Mobile = geoResponse.Mobile,
-                Proxy = geoResponse.Proxy,
-                Hosting = geoResponse.Hosting
+                Mobile = ipApiBaseUrlResponse.Mobile,
+                Proxy = ipApiBaseUrlResponse.Proxy,
+                Hosting = ipApiBaseUrlResponse.Hosting
             };
 
             using (var scope = new UnitOfWork())
