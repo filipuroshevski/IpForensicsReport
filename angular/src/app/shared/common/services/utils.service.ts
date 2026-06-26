@@ -23,7 +23,7 @@ export class UtilsService {
     }
     if (errorResponse != null && errorResponse.status != 0) {
 
-      var errorsToModel = JSON.parse(errorResponse.error.value);
+      var errorsToModel = JSON.parse(errorResponse.error.Value);
       var validationErrors = this.validationErrors(errorsToModel);
 
       if (validationErrors["SystemErrorOccured"] != undefined && validationErrors["SystemErrorOccured"] != null) {

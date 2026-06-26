@@ -11,15 +11,15 @@ export class AuthenticationService {
 
    loginUser = new Subject<boolean>();
 
-  constructor(private httpService: HttpService) {}
+  constructor(private _httpService: HttpService) {}
 
   registerUser(model: RegisterModel) {
     const url = "Authentication/RegisterUser";
-    return this.httpService.httpPost(url, model);
+    return this._httpService.httpPost(url, model);
   }
 
   login(model: LoginModel) {
     const url = "Authentication/Login";
-    return this.httpService.httpPost(url, model);
+    return this._httpService.httpPost(url, model);
   }
 }

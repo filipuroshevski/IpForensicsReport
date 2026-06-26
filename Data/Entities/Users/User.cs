@@ -1,4 +1,5 @@
 
+using Data.Entities.IpForensicsReports;
 using Microsoft.AspNetCore.Identity;
 
 namespace Data.Entities.Users
@@ -7,5 +8,7 @@ namespace Data.Entities.Users
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
+
+        public IList<IpForensicsReport> IpForensicsReports { get; set; } = new List<IpForensicsReport>();
     }
 }

@@ -1,0 +1,54 @@
+.report-card {
+  border-radius: 16px;
+  background-color: #eef4fb;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-card--blue {
+  background-color: #bed0e5;
+}
+
+.report-card--green {
+  background-color: #bed0e5;
+}
+
+.report-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.12);
+}
+
+/* Circular badge with green progress-style arc behind a floating white disc */
+.report-icon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(from 180deg, #0d6efd 0deg 180deg, #dcdcdc 180deg 360deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-icon::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+}
+
+.report-icon svg {
+  position: relative;
+  z-index: 1;
+  width: 46px;
+  height: 46px;
+  color: #2f2f2f;
+}
+
+.report-label {
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: #5a3e2b;
+}

@@ -37,6 +37,7 @@
               "src/assets/vendors/daterangepicker/daterangepicker.css",
               "src/assets/vendors/chartist/chartist.min.css",
               "src/assets/css/style.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ]
           },

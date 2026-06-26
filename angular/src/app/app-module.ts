@@ -16,12 +16,18 @@ import { Guard } from './authentication/guard/guard';
 import { LoggedInGuard } from './authentication/guard/logged-in-guard';
 import { Dashboard } from './ip-forensics-report/dashboard/dashboard';
 import { NgHttpLoaderComponent } from 'ng-http-loader';
+import { GenerateReport } from './ip-forensics-report/generate-report/generate-report';
+import { ReportList } from './ip-forensics-report/report-list/report-list';
+import { IpForensicsReportService } from './ip-forensics-report/ip-forensics-report.service';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const encryptStorage = new EncryptStorage(GlobalConstants.SecretKey, 'sessionStorage');
 
 @NgModule({
-  declarations: [App, Login, Register,  Dashboard],
+  declarations: [App, Login, Register, Dashboard, GenerateReport, ReportList],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -33,6 +39,12 @@ const encryptStorage = new EncryptStorage(GlobalConstants.SecretKey, 'sessionSto
         },
       },
     }),
+     ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true
+    })
+
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -40,8 +52,9 @@ const encryptStorage = new EncryptStorage(GlobalConstants.SecretKey, 'sessionSto
     AuthenticationService,
     HttpService,
     Guard,
-    LoggedInGuard
+    LoggedInGuard,
+    IpForensicsReportService
   ],
   bootstrap: [App],
 })
-export class AppModule {}
+export class AppModule { }

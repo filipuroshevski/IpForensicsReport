@@ -5,6 +5,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Service.Implementation.Common;
+using Service.Implementation.Common.DataProtection;
+using Service.Implementation.IpForensicsReports;
+using Service.Interface.Common;
+using Service.Interface.Common.DataProtection;
+using Service.Interface.IpForensicsReport;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +36,12 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddScoped<Service.Interface.Authentication.IAuthenticationService,
     Service.Implementation.Authentication.AuthenticationService>();
+builder.Services.AddScoped<IIpForensicsReportService,
+    IpForensicsReportService>();
+builder.Services.AddScoped<IDataProtectionService,
+    DataProtectionService>();
+builder.Services.AddScoped<ICommonService,
+   CommonService>();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -64,6 +76,14 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    });
+
+builder.Services.AddHttpClient();
+builder.Services.AddDataProtection();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

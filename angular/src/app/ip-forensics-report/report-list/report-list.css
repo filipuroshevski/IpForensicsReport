@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.content-wrapper.auth {
+  min-height: 100vh;
+  align-items: flex-start !important;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.auth-form-light {
+  width: 100%;
+}
+
+.content-wrapper.auth .row,
+.content-wrapper.auth .row > * {
+  min-width: 0;
+}
+
+
+
+
+@media (max-width: 575.98px) {
+  .content-wrapper.auth {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}

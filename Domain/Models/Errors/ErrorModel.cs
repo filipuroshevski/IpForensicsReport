@@ -25,7 +25,10 @@ namespace Domain.Models.Errors
             "The Password must be greater than 6 characters";
         #endregion
 
-
+        #region Generate Report Errors
+        public const string IpAddressRequired = "The Ip Address is required field";
+        public const string IpAddressInvalid = "The Ip Address is invalid";
+        #endregion
 
     }
 }
